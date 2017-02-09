@@ -10,6 +10,7 @@
 		9A3096245500387525B720FA /* libPods-RxFMDBManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 458D93CC8BDD908EE0A8FB3F /* libPods-RxFMDBManager.a */; };
 		B9B016EDB9105DC238E09AA4 /* libPods-RxFMDBManagerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA132FED20A3E296271FD95E /* libPods-RxFMDBManagerTests.a */; };
 		DB7D13CD791F7414EB157C69 /* libPods-RxFMDBManagerUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1627DD1B8741DA1A8C20C125 /* libPods-RxFMDBManagerUITests.a */; };
+		DF299B931E4C03EB00EB2AB0 /* FMDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DF299B921E4C03EB00EB2AB0 /* FMDBManager.m */; };
 		DF473E851E4B221F0041A050 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DF473E841E4B221F0041A050 /* main.m */; };
 		DF473E881E4B221F0041A050 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DF473E871E4B221F0041A050 /* AppDelegate.m */; };
 		DF473E8B1E4B221F0041A050 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF473E8A1E4B221F0041A050 /* ViewController.m */; };
@@ -46,6 +47,10 @@
 		BA132FED20A3E296271FD95E /* libPods-RxFMDBManagerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RxFMDBManagerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C02C9B3629678626F2325CCA /* Pods-RxFMDBManagerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxFMDBManagerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxFMDBManagerTests/Pods-RxFMDBManagerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CDF1039F67E03ED37D0C5536 /* Pods-RxFMDBManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxFMDBManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxFMDBManager/Pods-RxFMDBManager.release.xcconfig"; sourceTree = "<group>"; };
+		DF299B911E4C03EB00EB2AB0 /* FMDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDBManager.h; sourceTree = "<group>"; };
+		DF299B921E4C03EB00EB2AB0 /* FMDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDBManager.m; sourceTree = "<group>"; };
+		DF299B951E4C042800EB2AB0 /* RXSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXSingleton.h; sourceTree = "<group>"; };
+		DF299B961E4C047A00EB2AB0 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = ../PrefixHeader.pch; sourceTree = "<group>"; };
 		DF473E801E4B221F0041A050 /* RxFMDBManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxFMDBManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF473E841E4B221F0041A050 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DF473E861E4B221F0041A050 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -116,6 +121,24 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		DF299B901E4C03B500EB2AB0 /* FMDBManager */ = {
+			isa = PBXGroup;
+			children = (
+				DF299B911E4C03EB00EB2AB0 /* FMDBManager.h */,
+				DF299B921E4C03EB00EB2AB0 /* FMDBManager.m */,
+			);
+			path = FMDBManager;
+			sourceTree = "<group>";
+		};
+		DF299B941E4C040900EB2AB0 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				DF299B961E4C047A00EB2AB0 /* PrefixHeader.pch */,
+				DF299B951E4C042800EB2AB0 /* RXSingleton.h */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
 		DF473E771E4B221F0041A050 = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +164,8 @@
 		DF473E821E4B221F0041A050 /* RxFMDBManager */ = {
 			isa = PBXGroup;
 			children = (
+				DF299B941E4C040900EB2AB0 /* Tool */,
+				DF299B901E4C03B500EB2AB0 /* FMDBManager */,
 				DF473E861E4B221F0041A050 /* AppDelegate.h */,
 				DF473E871E4B221F0041A050 /* AppDelegate.m */,
 				DF473E891E4B221F0041A050 /* ViewController.h */,
@@ -447,6 +472,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF299B931E4C03EB00EB2AB0 /* FMDBManager.m in Sources */,
 				DF473E8B1E4B221F0041A050 /* ViewController.m in Sources */,
 				DF473E881E4B221F0041A050 /* AppDelegate.m in Sources */,
 				DF473E851E4B221F0041A050 /* main.m in Sources */,
@@ -600,6 +626,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = P7U52R78ZF;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = /Users/rxl/Desktop/FMDB/RxFMDBManager/RxFMDBManager/PrefixHeader.pch;
 				INFOPLIST_FILE = RxFMDBManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -614,6 +642,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = P7U52R78ZF;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = /Users/rxl/Desktop/FMDB/RxFMDBManager/RxFMDBManager/PrefixHeader.pch;
 				INFOPLIST_FILE = RxFMDBManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

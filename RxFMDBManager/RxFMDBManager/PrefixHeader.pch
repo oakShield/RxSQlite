@@ -1,0 +1,14 @@
+//
+//  PrefixHeader.pch
+//  RxFMDBManager
+//
+//  Created by RXL on 17/2/9.
+//  Copyright © 2017年 RXL. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "RXSingleton.h"
+
+#endif /* PrefixHeader_pch */
