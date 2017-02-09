@@ -53,7 +53,7 @@ FMDatabaseQueue *queue;
     }];
 }
 
--(void)addStudentWithJsonArr:(NSArray *)jsonArr{
+-(void)addStudentWithJsonArr:(NSArray *)jsonArr WithErrorBlock:(void(^)())errorBlock{
     
     NSString *sql = @"INSERT OR REPLACE INTO t_students (name,userId) VALUES (?,?);";
     
@@ -75,6 +75,7 @@ FMDatabaseQueue *queue;
 
         }
     }];
+    
     
 }
 

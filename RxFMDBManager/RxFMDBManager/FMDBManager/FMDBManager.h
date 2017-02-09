@@ -13,6 +13,6 @@
 + (instancetype)sharedFMDBManager;
 
 //增
--(void)addStudentWithJsonArr:(NSArray *)jsonArr;
+-(void)addStudentWithJsonArr:(NSArray *)jsonArr WithErrorBlock:(void(^)())errorBlock;
 
 @end

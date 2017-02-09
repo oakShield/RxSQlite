@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) NSMutableArray *studentsArr;
-
+@property (nonatomic, strong) FMDBManager *dataBaseManager;
 @end
 
 @implementation ViewController
@@ -26,8 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    FMDBManager *dataBaseManager = [FMDBManager sharedFMDBManager];
-    
+    //测试批量添加数据
     NSArray *studentArr = @[
                             @{@"name":@"Lili",@"userId":@"1"},
                             @{@"name":@"Ted",@"userId":@"2"},
@@ -35,9 +34,12 @@
                             @{@"name":@"Rose",@"userId":@"4"},
                             @{@"name":@"Lucy",@"userId":@"5"},
                             @{@"name":@"Bob",@"userId":@"6"}
+                            
                             ];
     
-    [dataBaseManager addStudentWithJsonArr:studentArr];
+    [self.dataBaseManager addStudentWithJsonArr:studentArr WithErrorBlock:^{
+        
+    }];
     
 }
 - (IBAction)hiddenKeyBoard:(id)sender {
@@ -45,6 +47,15 @@
 }
 #pragma mark - 数据库操作
 - (IBAction)addBtnClick:(id)sender {
+    
+    //检查数据的合法性
+    if (self.nameTextFiled.text.length && self.userIDTextFiled.text.length) {
+     
+        [self.dataBaseManager addStudentWithJsonArr:@[@{@"name":self.nameTextFiled.text,@"userId":self.userIDTextFiled.text}] WithErrorBlock:^{
+            
+        }];
+        
+    }
 }
 - (IBAction)deleteBtnClick:(id)sender {
 }
@@ -83,6 +94,8 @@
     }
     return _studentsArr;
 }
-
+-(FMDBManager *)dataBaseManager{
+    return [FMDBManager sharedFMDBManager];
+}
 
 @end
