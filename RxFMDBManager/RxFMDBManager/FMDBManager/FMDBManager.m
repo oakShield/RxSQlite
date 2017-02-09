@@ -8,6 +8,7 @@
 
 #import "FMDBManager.h"
 
+static NSString *domain = @"com.rxl.fmdbManager.ErrorDomain";
 FMDatabaseQueue *queue;
 
 @implementation FMDBManager
@@ -53,9 +54,11 @@ FMDatabaseQueue *queue;
     }];
 }
 
--(void)addStudentWithJsonArr:(NSArray *)jsonArr WithErrorBlock:(void(^)())errorBlock{
+-(void)addStudentWithJsonArr:(NSArray *)jsonArr WithSuccess:(void (^)(NSError *error))completion{
     
-    NSString *sql = @"INSERT OR REPLACE INTO t_students (name,userId) VALUES (?,?);";
+    NSString *sql = @"INSERT INTO t_students (name,userId) VALUES (?,?);";
+    
+    __block NSError *error = nil;
     
     [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
         
@@ -67,6 +70,8 @@ FMDatabaseQueue *queue;
                 
                 DLog(@"插入失败");
                 
+                error = [NSError errorWithDomain:domain code:1 userInfo:nil];
+                
                 //回滚
                 *rollback = YES;
                 
@@ -74,8 +79,9 @@ FMDatabaseQueue *queue;
             }
 
         }
+        completion(error);
+        
     }];
-    
     
 }
 
