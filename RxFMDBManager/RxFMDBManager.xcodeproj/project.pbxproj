@@ -19,6 +19,7 @@
 		DF473E931E4B221F0041A050 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF473E911E4B221F0041A050 /* LaunchScreen.storyboard */; };
 		DF473E9E1E4B221F0041A050 /* RxFMDBManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DF473E9D1E4B221F0041A050 /* RxFMDBManagerTests.m */; };
 		DF473EA91E4B221F0041A050 /* RxFMDBManagerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DF473EA81E4B221F0041A050 /* RxFMDBManagerUITests.m */; };
+		DFA97B821E4C139100BFE49D /* NSString+BAKit.m in Sources */ = {isa = PBXBuildFile; fileRef = DFA97B801E4C139100BFE49D /* NSString+BAKit.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,8 @@
 		DF473EA41E4B221F0041A050 /* RxFMDBManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RxFMDBManagerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF473EA81E4B221F0041A050 /* RxFMDBManagerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RxFMDBManagerUITests.m; sourceTree = "<group>"; };
 		DF473EAA1E4B221F0041A050 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DFA97B7F1E4C139100BFE49D /* NSString+BAKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BAKit.h"; sourceTree = "<group>"; };
+		DFA97B801E4C139100BFE49D /* NSString+BAKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BAKit.m"; sourceTree = "<group>"; };
 		F0B5CD629189C70BCD9DEC44 /* Pods-RxFMDBManagerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxFMDBManagerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxFMDBManagerUITests/Pods-RxFMDBManagerUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,6 +136,8 @@
 			isa = PBXGroup;
 			children = (
 				DF299B961E4C047A00EB2AB0 /* PrefixHeader.pch */,
+				DFA97B7F1E4C139100BFE49D /* NSString+BAKit.h */,
+				DFA97B801E4C139100BFE49D /* NSString+BAKit.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -472,6 +477,7 @@
 			files = (
 				DF299B931E4C03EB00EB2AB0 /* FMDBManager.m in Sources */,
 				DF473E8B1E4B221F0041A050 /* ViewController.m in Sources */,
+				DFA97B821E4C139100BFE49D /* NSString+BAKit.m in Sources */,
 				DF473E881E4B221F0041A050 /* AppDelegate.m in Sources */,
 				DF473E851E4B221F0041A050 /* main.m in Sources */,
 			);

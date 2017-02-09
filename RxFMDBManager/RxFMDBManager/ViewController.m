@@ -26,6 +26,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    FMDBManager *dataBaseManager = [FMDBManager sharedFMDBManager];
+    
+    NSArray *studentArr = @[
+                            @{@"name":@"Lili",@"userId":@"1"},
+                            @{@"name":@"Ted",@"userId":@"2"},
+                            @{@"name":@"Jack",@"userId":@"3"},
+                            @{@"name":@"Rose",@"userId":@"4"},
+                            @{@"name":@"Lucy",@"userId":@"5"},
+                            @{@"name":@"Bob",@"userId":@"6"}
+                            ];
+    
+    [dataBaseManager addStudentWithJsonArr:studentArr];
+    
+}
+- (IBAction)hiddenKeyBoard:(id)sender {
+    [self.view endEditing:YES];
 }
 #pragma mark - 数据库操作
 - (IBAction)addBtnClick:(id)sender {

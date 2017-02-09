@@ -9,6 +9,19 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
-#import "RXSingleton.h"
+#import "FMDBManager.h"
+#import <FMDB.h>
+#import "NSString+BAKit.h"
+
+#pragma mark - 数据库路径
+#define SQlitePath(sqliteName) [[NSString BA_path_getDocumentsPath] stringByAppendingString:[NSString stringWithFormat:@"/%@.db",sqliteName]]
+
+
+
+#ifdef DEBUG
+# define DLog(fmt, ...) NSLog((@"\n[File:%s]\n" "[Function:%s]\n" "[Line:%d] \n" fmt), __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+# define DLog(...);
+#endif
 
 #endif /* PrefixHeader_pch */
