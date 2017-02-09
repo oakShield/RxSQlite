@@ -10,6 +10,6 @@
 
 @interface FMDBManager : NSObject
 
-RxSingleton_h(FMDBManager)
++ (instancetype)sharedFMDBManager;
 
 @end

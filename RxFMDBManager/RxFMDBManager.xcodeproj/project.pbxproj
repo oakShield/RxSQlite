@@ -49,7 +49,6 @@
 		CDF1039F67E03ED37D0C5536 /* Pods-RxFMDBManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxFMDBManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxFMDBManager/Pods-RxFMDBManager.release.xcconfig"; sourceTree = "<group>"; };
 		DF299B911E4C03EB00EB2AB0 /* FMDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDBManager.h; sourceTree = "<group>"; };
 		DF299B921E4C03EB00EB2AB0 /* FMDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDBManager.m; sourceTree = "<group>"; };
-		DF299B951E4C042800EB2AB0 /* RXSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXSingleton.h; sourceTree = "<group>"; };
 		DF299B961E4C047A00EB2AB0 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = ../PrefixHeader.pch; sourceTree = "<group>"; };
 		DF473E801E4B221F0041A050 /* RxFMDBManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxFMDBManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF473E841E4B221F0041A050 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -134,7 +133,6 @@
 			isa = PBXGroup;
 			children = (
 				DF299B961E4C047A00EB2AB0 /* PrefixHeader.pch */,
-				DF299B951E4C042800EB2AB0 /* RXSingleton.h */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
