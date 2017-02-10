@@ -6,6 +6,7 @@ target 'RxFMDBManager' do
   # use_frameworks!
     pod 'FMDB'
     pod 'SVProgressHUD'
+    pod 'MJExtension'
   # Pods for RxFMDBManager
 
   target 'RxFMDBManagerTests' do
