@@ -50,11 +50,12 @@ FMDatabaseQueue *queue;
         }else{
             DLog(@"建表失败");
         }
-        
     }];
+    
+    
 }
 
--(void)addStudentWithJsonArr:(NSArray *)jsonArr WithCompletion:(void (^)(NSError *error))completion{
+-(void)executeUpdateWithJsonArr:(NSArray *)jsonArr WithCompletion:(void (^)(NSError *error))completion{
     
     NSString *sql = @"INSERT INTO t_students (name,userId) VALUES (?,?);";
     
@@ -85,30 +86,37 @@ FMDatabaseQueue *queue;
     
 }
 
--(NSArray *)selectStudentWithCondition:(NSString *)condition FromTable:(NSString *)tableName{
+-(NSArray *)executeStudentWithCondition:(NSString *)condition FromTable:(NSString *)tableName{
     
     
-    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@",tableName,condition];
+    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ %@",tableName,condition];
     
     __block NSMutableArray *resultArr = [NSMutableArray array];
     
-    [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+    //查询不需要开启事务
+    [queue inDatabase:^(FMDatabase *db) {
         
         FMResultSet *set = [db executeQuery:sql];
         
-        for (int i = 0; i < [set columnCount]; ++i) {
-            
-            NSString *columnName = [set columnNameForIndex:i];
-            
-            NSString *columnValue = [set columnNameForIndex:i];
-            
-            DLog(@"%@ --- %@",columnName,columnValue);
-            
-            if (columnValue == nil) {
-                columnValue = @"";
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        
+        while ([set next]) {
+            for (int i = 0; i < [set columnCount]; ++i) {
+                
+                NSString *columnName = [set columnNameForIndex:i];
+                
+                NSString *columnValue = [set stringForColumnIndex:i];
+                
+                DLog(@"%@ --- %@",columnName,columnValue);
+                
+                if (columnValue == nil) {
+                    columnValue = @"";
+                }
+                
+                [dict setValue:columnValue forKey:columnName];
             }
             
-            [resultArr addObject:@{columnName : columnValue}];
+            [resultArr addObject:dict];
         }
         
     }];
@@ -117,5 +125,16 @@ FMDatabaseQueue *queue;
     return resultArr;
 }
 
-
+-(BOOL)executeTableExist:(NSString *)tableName{
+    
+    __block BOOL isExist = NO;
+    
+    [queue inDatabase:^(FMDatabase *db) {
+       
+        isExist = [db tableExists:tableName];
+        
+    }];
+    
+    return isExist;
+}
 @end

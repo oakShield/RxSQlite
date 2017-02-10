@@ -31,15 +31,15 @@
     //加入初始化数据
     NSArray *studentArr = @[
                             @{@"name":@"Lili",@"userId":@"1"},
-                            @{@"name":@"Ted",@"userId":@"2"},
+                            @{@"name":@"Ted" ,@"userId":@"2"},
                             @{@"name":@"Jack",@"userId":@"3"},
                             @{@"name":@"Rose",@"userId":@"4"},
                             @{@"name":@"Lucy",@"userId":@"5"},
-                            @{@"name":@"Bob",@"userId":@"6"}
+                            @{@"name":@"Bob" ,@"userId":@"6"}
                             ];
 
     
-    [self.dataBaseManager addStudentWithJsonArr:studentArr WithCompletion:^(NSError *error) {
+    [self.dataBaseManager executeUpdateWithJsonArr:studentArr WithCompletion:^(NSError *error) {
         
         if (error) {
             
@@ -62,7 +62,7 @@
     //检查数据的合法性
     if (self.nameTextFiled.text.length && self.userIDTextFiled.text.length) {
      
-        [self.dataBaseManager addStudentWithJsonArr:@[@{@"name":self.nameTextFiled.text,@"userId":self.userIDTextFiled.text}] WithCompletion:^(NSError *error) {
+        [self.dataBaseManager executeUpdateWithJsonArr:@[@{@"name":self.nameTextFiled.text,@"userId":self.userIDTextFiled.text}] WithCompletion:^(NSError *error) {
             
             if (!error) {
                 //刷新列表
@@ -83,6 +83,31 @@
 }
 - (IBAction)selectBtnClick:(id)sender {
     
+    //注意条件语句之间的空格以及标点符号
+    NSString *conditionStr;
+    
+//    if (self.nameTextFiled.text.length || self.userIDTextFiled.text.length) {
+//        
+//        conditionStr = @"WHERE";
+//        
+//        if (self.nameTextFiled.text.length) {
+//            
+//            conditionStr = [conditionStr stringByAppendingString:[NSString stringWithFormat:@" name = %@ ,",self.nameTextFiled.text]];
+//            
+//        }
+//        
+//        if (self.userIDTextFiled.text.length) {
+//            
+//            conditionStr =  [conditionStr stringByAppendingString:[NSString stringWithFormat:@" userId = %@ ;",self.userIDTextFiled.text]];
+//        }
+//        
+//    }
+//
+    
+    //TODO:测试
+    conditionStr = [NSString stringWithFormat:@"WHERE USERID = %@ AND NAME = 'Lili';" ,self.userIDTextFiled.text];
+    
+    NSArray *resultArr = [self.dataBaseManager executeStudentWithCondition:conditionStr FromTable:studentTable];
     
 }
 
