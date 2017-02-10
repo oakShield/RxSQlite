@@ -19,6 +19,7 @@
 		DF473E931E4B221F0041A050 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF473E911E4B221F0041A050 /* LaunchScreen.storyboard */; };
 		DF473E9E1E4B221F0041A050 /* RxFMDBManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DF473E9D1E4B221F0041A050 /* RxFMDBManagerTests.m */; };
 		DF473EA91E4B221F0041A050 /* RxFMDBManagerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DF473EA81E4B221F0041A050 /* RxFMDBManagerUITests.m */; };
+		DF567BD51E4DC39F003956A5 /* RxStudentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DF567BD41E4DC39F003956A5 /* RxStudentModel.m */; };
 		DFA97B821E4C139100BFE49D /* NSString+BAKit.m in Sources */ = {isa = PBXBuildFile; fileRef = DFA97B801E4C139100BFE49D /* NSString+BAKit.m */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,8 @@
 		DF473EA41E4B221F0041A050 /* RxFMDBManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RxFMDBManagerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF473EA81E4B221F0041A050 /* RxFMDBManagerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RxFMDBManagerUITests.m; sourceTree = "<group>"; };
 		DF473EAA1E4B221F0041A050 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DF567BD31E4DC39F003956A5 /* RxStudentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxStudentModel.h; sourceTree = "<group>"; };
+		DF567BD41E4DC39F003956A5 /* RxStudentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxStudentModel.m; sourceTree = "<group>"; };
 		DFA97B7F1E4C139100BFE49D /* NSString+BAKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BAKit.h"; sourceTree = "<group>"; };
 		DFA97B801E4C139100BFE49D /* NSString+BAKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BAKit.m"; sourceTree = "<group>"; };
 		F0B5CD629189C70BCD9DEC44 /* Pods-RxFMDBManagerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxFMDBManagerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxFMDBManagerUITests/Pods-RxFMDBManagerUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -173,6 +176,8 @@
 				DF473E871E4B221F0041A050 /* AppDelegate.m */,
 				DF473E891E4B221F0041A050 /* ViewController.h */,
 				DF473E8A1E4B221F0041A050 /* ViewController.m */,
+				DF567BD31E4DC39F003956A5 /* RxStudentModel.h */,
+				DF567BD41E4DC39F003956A5 /* RxStudentModel.m */,
 				DF473E8C1E4B221F0041A050 /* Main.storyboard */,
 				DF473E8F1E4B221F0041A050 /* Assets.xcassets */,
 				DF473E911E4B221F0041A050 /* LaunchScreen.storyboard */,
@@ -480,6 +485,7 @@
 				DFA97B821E4C139100BFE49D /* NSString+BAKit.m in Sources */,
 				DF473E881E4B221F0041A050 /* AppDelegate.m in Sources */,
 				DF473E851E4B221F0041A050 /* main.m in Sources */,
+				DF567BD51E4DC39F003956A5 /* RxStudentModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

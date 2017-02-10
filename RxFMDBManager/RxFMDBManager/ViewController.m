@@ -19,7 +19,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *fixBtn;
 @property (weak, nonatomic) IBOutlet UIButton *selectBtn;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
 @property (nonatomic, strong) NSMutableArray *studentsArr;
 @property (nonatomic, strong) FMDBManager *dataBaseManager;
 @end
@@ -29,30 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //加入初始化数据
-    NSArray *studentArr = @[
-                            @{@"name":@"Lili",@"userId":@"1"},
-                            @{@"name":@"Ted" ,@"userId":@"2"},
-                            @{@"name":@"Jack",@"userId":@"3"},
-                            @{@"name":@"Rose",@"userId":@"4"},
-                            @{@"name":@"Lucy",@"userId":@"5"},
-                            @{@"name":@"Bob7" ,@"userId":@"6"},
-                            @{@"name":@"Bili" ,@"userId":@"7"}
-                            ];
+    //查询本地数据
 
-    
-    [self.dataBaseManager executeUpdateWithJsonArr:studentArr WithCompletion:^(NSError *error) {
-        
-        if (error) {
-            
-            [SVProgressHUD showErrorWithStatus:@"插入失败"];
-            
-        }else{
-            
-            [SVProgressHUD showSuccessWithStatus:@"插入成功"];
-            
-        }
-    }];
     
 }
 - (IBAction)hiddenKeyBoard:(id)sender {
@@ -87,13 +64,26 @@
 
     NSArray *resultArr = [self.dataBaseManager executeStudentWithCondition:self.selectContionTextFiled.text FromTable:studentTable];
     
+    if (resultArr.count) {
+        
+        [SVProgressHUD showErrorWithStatus:@"未查到"];
+        
+    }else{
+        
+        [self.studentsArr removeAllObjects];
+        
+        [self.studentsArr addObjectsFromArray:resultArr];
+        
+        [self.tableView reloadData];
+    }
 }
+
 
 
 #pragma mark - 數據源及代理方法
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 100;
+    return self.studentsArr.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -105,22 +95,71 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
     }
-
+    
+    RxStudentModel *model = self.studentsArr[indexPath.row];
+    
+    cell.textLabel.text = model.name;
+    cell.detailTextLabel.text = model.userId;
     
     return cell;
 }
 
+#pragma mark - 自定义方法
 
+-(NSMutableArray *)StudentJsonRevertToModelWith:(NSArray *)jsonArr{
+    
+    NSMutableArray *modelArr = [NSMutableArray arrayWithCapacity:jsonArr.count];
+    
+    for (NSDictionary *dict in jsonArr) {
+        
+        RxStudentModel *model = [RxStudentModel mj_objectWithKeyValues:dict];
+        
+        [modelArr addObject:model];
+        
+    }
+    
+    return modelArr;
+}
+
+
+-(void)prepareData{
+    NSArray *studentArr = @[
+                            @{@"name":@"Lili",@"userId":@"1"},
+                            @{@"name":@"Ted" ,@"userId":@"2"},
+                            @{@"name":@"Jack",@"userId":@"3"},
+                            @{@"name":@"Rose",@"userId":@"4"},
+                            @{@"name":@"Lucy",@"userId":@"5"},
+                            @{@"name":@"Bob7" ,@"userId":@"6"},
+                            @{@"name":@"Bili" ,@"userId":@"7"}
+                            ];
+    
+    
+    [self.dataBaseManager executeUpdateWithJsonArr:studentArr WithCompletion:^(NSError *error) {
+        
+        if (error) {
+            
+            [SVProgressHUD showErrorWithStatus:@"插入失败"];
+            
+        }else{
+            
+            [SVProgressHUD showSuccessWithStatus:@"插入成功"];
+            
+        }
+    }];
+}
 
 #pragma mark - 懒加载
 -(NSMutableArray *)studentsArr{
     if (_studentsArr == nil) {
-        _studentsArr = [NSMutableArray array];
+        NSArray *jsonarr = [[self.dataBaseManager executeAllStudentFrom:studentTable] copy];
+        _studentsArr = [self StudentJsonRevertToModelWith:jsonarr];
     }
     return _studentsArr;
 }
 -(FMDBManager *)dataBaseManager{
     return [FMDBManager sharedFMDBManager];
 }
+
+
 
 @end

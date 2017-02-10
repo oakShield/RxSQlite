@@ -128,6 +128,45 @@ FMDatabaseQueue *queue;
     return resultArr;
 }
 
+-(NSArray *)executeAllStudentFrom:(NSString *)tableName{
+    
+    
+    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@",tableName];
+    
+    __block NSMutableArray *resultArr = [NSMutableArray array];
+    
+    //查询不需要开启事务
+    [queue inDatabase:^(FMDatabase *db) {
+        
+        FMResultSet *set = [db executeQuery:sql];
+        
+        while ([set next]) {
+            
+            NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+            
+            for (int i = 0; i < [set columnCount]; ++i) {
+                
+                NSString *columnName = [set columnNameForIndex:i];
+                
+                NSString *columnValue = [set stringForColumnIndex:i];
+                
+                DLog(@"%@ --- %@",columnName,columnValue);
+                
+                if (columnValue == nil) {
+                    columnValue = @"";
+                }
+                
+                [dict setValue:columnValue forKey:columnName];
+            }
+            
+            [resultArr addObject:dict];
+        }
+        
+    }];
+    
+    return resultArr;
+}
+
 -(BOOL)executeTableExist:(NSString *)tableName{
     
     __block BOOL isExist = NO;

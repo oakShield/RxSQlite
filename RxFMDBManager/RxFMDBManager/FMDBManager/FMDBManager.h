@@ -20,6 +20,8 @@
 //查
 -(NSArray *)executeStudentWithCondition:(NSString *)condition FromTable:(NSString *)tableName;
 
+-(NSArray *)executeAllStudentFrom:(NSString *)tableName;
+
 -(BOOL)executeTableExist:(NSString *)tableName;
 
 @end
