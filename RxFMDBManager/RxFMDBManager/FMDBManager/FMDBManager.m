@@ -88,9 +88,9 @@ FMDatabaseQueue *queue;
 
 -(NSArray *)executeStudentWithCondition:(NSString *)condition FromTable:(NSString *)tableName{
     
-    //先查询userID为condition
+    //查询userID为condition或者NAME包含condition的
     
-    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE USERID = %@",tableName,condition];
+    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE USERID = %@ OR NAME LIKE '%%%@%%'",tableName,condition,condition];
     
     __block NSMutableArray *resultArr = [NSMutableArray array];
     
@@ -99,9 +99,10 @@ FMDatabaseQueue *queue;
         
         FMResultSet *set = [db executeQuery:sql];
         
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        
         while ([set next]) {
+            
+            NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+            
             for (int i = 0; i < [set columnCount]; ++i) {
                 
                 NSString *columnName = [set columnNameForIndex:i];
@@ -122,38 +123,7 @@ FMDatabaseQueue *queue;
         
     }];
     
-    
-    
-    //查询NAME包含conditon的
-    sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE NAME LIKE %%%@%%",tableName,condition];
-    
-    [queue inDatabase:^(FMDatabase *db) {
-        
-        FMResultSet *set = [db executeQuery:sql];
-        
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        
-        while ([set next]) {
-            for (int i = 0; i < [set columnCount]; ++i) {
-                
-                NSString *columnName = [set columnNameForIndex:i];
-                
-                NSString *columnValue = [set stringForColumnIndex:i];
-                
-                DLog(@"%@ --- %@",columnName,columnValue);
-                
-                if (columnValue == nil) {
-                    columnValue = @"";
-                }
-                
-                [dict setValue:columnValue forKey:columnName];
-            }
-            
-            [resultArr addObject:dict];
-        }
-        
-    }];
-    
+
     
     return resultArr;
 }
