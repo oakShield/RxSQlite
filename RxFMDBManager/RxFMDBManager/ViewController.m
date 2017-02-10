@@ -13,6 +13,7 @@
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITextField *nameTextFiled;
 @property (weak, nonatomic) IBOutlet UITextField *userIDTextFiled;
+@property (nonatomic, weak) IBOutlet UITextField *selectContionTextFiled;
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
 @property (weak, nonatomic) IBOutlet UIButton *deleteBtn;
 @property (weak, nonatomic) IBOutlet UIButton *fixBtn;
@@ -82,32 +83,8 @@
 - (IBAction)fixBtnClick:(id)sender {
 }
 - (IBAction)selectBtnClick:(id)sender {
-    
-    //注意条件语句之间的空格以及标点符号
-    NSString *conditionStr;
-    
-//    if (self.nameTextFiled.text.length || self.userIDTextFiled.text.length) {
-//        
-//        conditionStr = @"WHERE";
-//        
-//        if (self.nameTextFiled.text.length) {
-//            
-//            conditionStr = [conditionStr stringByAppendingString:[NSString stringWithFormat:@" name = %@ ,",self.nameTextFiled.text]];
-//            
-//        }
-//        
-//        if (self.userIDTextFiled.text.length) {
-//            
-//            conditionStr =  [conditionStr stringByAppendingString:[NSString stringWithFormat:@" userId = %@ ;",self.userIDTextFiled.text]];
-//        }
-//        
-//    }
-//
-    
-    //TODO:测试
-    conditionStr = [NSString stringWithFormat:@"WHERE USERID = %@ AND NAME = 'Lili';" ,self.userIDTextFiled.text];
-    
-    NSArray *resultArr = [self.dataBaseManager executeStudentWithCondition:conditionStr FromTable:studentTable];
+
+    NSArray *resultArr = [self.dataBaseManager executeStudentWithCondition:self.selectContionTextFiled.text FromTable:studentTable];
     
 }
 

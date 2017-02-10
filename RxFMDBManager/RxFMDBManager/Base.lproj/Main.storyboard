@@ -94,6 +94,13 @@
                                     <action selector="selectBtnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bay-bC-tZb"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V99-st-4En">
+                                <rect key="frame" x="28" y="345" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -112,6 +119,7 @@
                         <outlet property="fixBtn" destination="Aku-ox-yjo" id="rZn-MG-hgE"/>
                         <outlet property="nameTextFiled" destination="NIG-4D-yDP" id="8XX-aD-1E4"/>
                         <outlet property="selectBtn" destination="6D8-E3-Oxq" id="wUU-4p-Piu"/>
+                        <outlet property="selectContionTextFiled" destination="V99-st-4En" id="bDa-HQ-FhJ"/>
                         <outlet property="tableView" destination="wCw-Hu-HsH" id="TbB-9B-4uX"/>
                         <outlet property="userIDTextFiled" destination="2pQ-3O-i5T" id="gwi-O4-VLJ"/>
                     </connections>

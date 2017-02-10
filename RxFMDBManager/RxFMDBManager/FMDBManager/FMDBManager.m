@@ -88,12 +88,45 @@ FMDatabaseQueue *queue;
 
 -(NSArray *)executeStudentWithCondition:(NSString *)condition FromTable:(NSString *)tableName{
     
+    //先查询userID为condition
     
-    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ %@",tableName,condition];
+    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE USERID = %@",tableName,condition];
     
     __block NSMutableArray *resultArr = [NSMutableArray array];
     
     //查询不需要开启事务
+    [queue inDatabase:^(FMDatabase *db) {
+        
+        FMResultSet *set = [db executeQuery:sql];
+        
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        
+        while ([set next]) {
+            for (int i = 0; i < [set columnCount]; ++i) {
+                
+                NSString *columnName = [set columnNameForIndex:i];
+                
+                NSString *columnValue = [set stringForColumnIndex:i];
+                
+                DLog(@"%@ --- %@",columnName,columnValue);
+                
+                if (columnValue == nil) {
+                    columnValue = @"";
+                }
+                
+                [dict setValue:columnValue forKey:columnName];
+            }
+            
+            [resultArr addObject:dict];
+        }
+        
+    }];
+    
+    
+    
+    //查询NAME包含conditon的
+    sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE NAME LIKE %%%@%%",tableName,condition];
+    
     [queue inDatabase:^(FMDatabase *db) {
         
         FMResultSet *set = [db executeQuery:sql];
