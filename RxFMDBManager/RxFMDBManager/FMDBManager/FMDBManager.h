@@ -13,6 +13,13 @@
 + (instancetype)sharedFMDBManager;
 
 //增
--(void)addStudentWithJsonArr:(NSArray *)jsonArr WithSuccess:(void (^)(NSError *error))completion;
+-(void)addStudentWithJsonArr:(NSArray *)jsonArr WithCompletion:(void (^)(NSError *error))completion;
+
+
+
+//查
+-(NSArray *)selectStudentWithCondition:(NSString *)condition FromTable:(NSString *)tableName;
+
+
 
 @end

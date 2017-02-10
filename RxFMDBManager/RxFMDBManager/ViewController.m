@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 
+#define studentTable @"t_students"
+
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITextField *nameTextFiled;
 @property (weak, nonatomic) IBOutlet UITextField *userIDTextFiled;
@@ -25,17 +27,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.dataBaseManager addStudentWithJsonArr:@[@{@"name":self.nameTextFiled.text,@"userId":self.userIDTextFiled.text}] WithSuccess:^(NSError *error) {
+    
+    //加入初始化数据
+    NSArray *studentArr = @[
+                            @{@"name":@"Lili",@"userId":@"1"},
+                            @{@"name":@"Ted",@"userId":@"2"},
+                            @{@"name":@"Jack",@"userId":@"3"},
+                            @{@"name":@"Rose",@"userId":@"4"},
+                            @{@"name":@"Lucy",@"userId":@"5"},
+                            @{@"name":@"Bob",@"userId":@"6"}
+                            ];
+
+    
+    [self.dataBaseManager addStudentWithJsonArr:studentArr WithCompletion:^(NSError *error) {
         
-        if (!error) {
-            //刷新列表
+        if (error) {
+            
+            [SVProgressHUD showErrorWithStatus:@"插入失败"];
             
         }else{
             
-            [SVProgressHUD showErrorWithStatus:@"插入失败,检查userId是否重复"];
+            [SVProgressHUD showSuccessWithStatus:@"插入成功"];
             
         }
-        
     }];
     
 }
@@ -48,10 +62,12 @@
     //检查数据的合法性
     if (self.nameTextFiled.text.length && self.userIDTextFiled.text.length) {
      
-        [self.dataBaseManager addStudentWithJsonArr:@[@{@"name":self.nameTextFiled.text,@"userId":self.userIDTextFiled.text}] WithSuccess:^(NSError *error) {
+        [self.dataBaseManager addStudentWithJsonArr:@[@{@"name":self.nameTextFiled.text,@"userId":self.userIDTextFiled.text}] WithCompletion:^(NSError *error) {
             
             if (!error) {
                 //刷新列表
+                [SVProgressHUD showSuccessWithStatus:@"插入成功"];
+                
                 
             }else{
                 [SVProgressHUD showErrorWithStatus:@"插入失败,检查userId是否重复"];
@@ -66,6 +82,8 @@
 - (IBAction)fixBtnClick:(id)sender {
 }
 - (IBAction)selectBtnClick:(id)sender {
+    
+    
 }
 
 

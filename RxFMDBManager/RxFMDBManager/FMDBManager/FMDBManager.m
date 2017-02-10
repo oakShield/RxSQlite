@@ -54,7 +54,7 @@ FMDatabaseQueue *queue;
     }];
 }
 
--(void)addStudentWithJsonArr:(NSArray *)jsonArr WithSuccess:(void (^)(NSError *error))completion{
+-(void)addStudentWithJsonArr:(NSArray *)jsonArr WithCompletion:(void (^)(NSError *error))completion{
     
     NSString *sql = @"INSERT INTO t_students (name,userId) VALUES (?,?);";
     
@@ -84,5 +84,38 @@ FMDatabaseQueue *queue;
     }];
     
 }
+
+-(NSArray *)selectStudentWithCondition:(NSString *)condition FromTable:(NSString *)tableName{
+    
+    
+    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@",tableName,condition];
+    
+    __block NSMutableArray *resultArr = [NSMutableArray array];
+    
+    [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        
+        FMResultSet *set = [db executeQuery:sql];
+        
+        for (int i = 0; i < [set columnCount]; ++i) {
+            
+            NSString *columnName = [set columnNameForIndex:i];
+            
+            NSString *columnValue = [set columnNameForIndex:i];
+            
+            DLog(@"%@ --- %@",columnName,columnValue);
+            
+            if (columnValue == nil) {
+                columnValue = @"";
+            }
+            
+            [resultArr addObject:@{columnName : columnValue}];
+        }
+        
+    }];
+    
+    
+    return resultArr;
+}
+
 
 @end
