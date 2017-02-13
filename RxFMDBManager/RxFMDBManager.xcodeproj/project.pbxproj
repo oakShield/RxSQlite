@@ -635,13 +635,14 @@
 			baseConfigurationReference = 65F9262414BECAD147FAA019 /* Pods-RxFMDBManager.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = P7U52R78ZF;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = /Users/rxl/Desktop/FMDB/RxFMDBManager/RxFMDBManager/PrefixHeader.pch;
 				INFOPLIST_FILE = RxFMDBManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.rxl.s3.RxFMDBManager;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rxl.RxFMDBManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -651,13 +652,14 @@
 			baseConfigurationReference = CDF1039F67E03ED37D0C5536 /* Pods-RxFMDBManager.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = P7U52R78ZF;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = /Users/rxl/Desktop/FMDB/RxFMDBManager/RxFMDBManager/PrefixHeader.pch;
 				INFOPLIST_FILE = RxFMDBManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.rxl.s3.RxFMDBManager;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rxl.RxFMDBManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

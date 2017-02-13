@@ -27,8 +27,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //查询本地数据
 
     
 }
@@ -64,15 +62,17 @@
 
     NSArray *resultArr = [self.dataBaseManager executeStudentWithCondition:self.selectContionTextFiled.text FromTable:studentTable];
     
-    if (resultArr.count) {
+    if (!resultArr.count) {
         
         [SVProgressHUD showErrorWithStatus:@"未查到"];
         
     }else{
         
+        [SVProgressHUD showSuccessWithStatus:@"已经查到"];
+        
         [self.studentsArr removeAllObjects];
         
-        [self.studentsArr addObjectsFromArray:resultArr];
+        self.studentsArr = [self StudentJsonRevertToModelWith:resultArr];
         
         [self.tableView reloadData];
     }

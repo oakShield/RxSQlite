@@ -16,6 +16,7 @@
 #import "NSString+BAKit.h"
 #import "RxStudentModel.h"
 
+
 #pragma mark - 数据库路径
 #define SQlitePath(sqliteName) [[NSString BA_path_getDocumentsPath] stringByAppendingString:[NSString stringWithFormat:@"/%@.db",sqliteName]]
 

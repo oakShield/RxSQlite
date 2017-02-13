@@ -109,7 +109,7 @@ FMDatabaseQueue *queue;
                 
                 NSString *columnValue = [set stringForColumnIndex:i];
                 
-                DLog(@"%@ --- %@",columnName,columnValue);
+//                DLog(@"%@ --- %@",columnName,columnValue);
                 
                 if (columnValue == nil) {
                     columnValue = @"";
