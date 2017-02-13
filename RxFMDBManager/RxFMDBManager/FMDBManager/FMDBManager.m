@@ -189,11 +189,29 @@ FMDatabaseQueue *queue;
        
         if (![db executeUpdate:sql]) {
             *rollback = YES;
-
         }
         
     }];
     
+}
+
+-(void)executeFixWithCondition:(NSString *)condition ToNewName:(NSString *)newName FromTable:(NSString *)tableName WithCompletion:(void (^)(NSError *error))completion{
+    
+    NSString *sql = [NSString stringWithFormat:@"UPDATE %@ SET name = '%@' WHERE userId = '%@'",tableName,newName,condition];
+    
+    __block NSError *error = nil;
+    
+    [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+       
+        if (![db executeUpdate:sql]) {
+            
+            error = [NSError errorWithDomain:domain code:1 userInfo:nil];
+            
+            *rollback = YES;
+        }
+        NSLog(@"%@", [NSThread currentThread]);
+        completion(error);
+    }];
 }
 
 @end

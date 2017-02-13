@@ -14,6 +14,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *nameTextFiled;
 @property (weak, nonatomic) IBOutlet UITextField *userIDTextFiled;
 @property (nonatomic, weak) IBOutlet UITextField *selectContionTextFiled;
+@property (weak, nonatomic) IBOutlet UITextField *fixUserIdTextFiled;
+@property (weak, nonatomic) IBOutlet UITextField *anthorNameTextFiled;
+
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
 @property (weak, nonatomic) IBOutlet UIButton *deleteBtn;
 @property (weak, nonatomic) IBOutlet UIButton *fixBtn;
@@ -27,7 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     
 }
 - (IBAction)hiddenKeyBoard:(id)sender {
@@ -68,7 +71,60 @@
     [self.tableView setEditing:!self.tableView.editing animated:YES] ;
 }
 - (IBAction)fixBtnClick:(id)sender {
+    
+    if (!self.fixUserIdTextFiled.text.length && !self.anthorNameTextFiled.text.length) {
+        
+        [SVProgressHUD showErrorWithStatus:@"请填写信息"];
+        
+        return;
+    }
+    
+    //改
+    [self.dataBaseManager executeFixWithCondition:self.fixUserIdTextFiled.text ToNewName:self.anthorNameTextFiled.text FromTable:studentTable WithCompletion:^(NSError *error) {
+        
+        if (error) {
+            
+            [SVProgressHUD showErrorWithStatus:@"失败,请检查是否存在"];
+            
+        }else{
+            
+            [SVProgressHUD showSuccessWithStatus:@"成功"];
+            
+            NSInteger row =[self fixValueWhere:self.fixUserIdTextFiled.text SetNewName:self.anthorNameTextFiled.text];
+            
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+            
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
+        
+    }];
+    
+    
+    
+    
+    
+
 }
+
+//修改数据中的数据
+-(NSInteger)fixValueWhere:(NSString *)userId SetNewName:(NSString *)newName{
+    
+    NSInteger index = 0;
+    
+    for (RxStudentModel *model in self.studentsArr) {
+        
+        if ([userId isEqualToString:model.userId]) {
+            
+            model.name = newName;
+            
+            break;
+        }
+        
+    }
+    
+    return index;
+}
+
 - (IBAction)selectBtnClick:(id)sender {
 
     NSArray *resultArr = [self.dataBaseManager executeStudentWithCondition:self.selectContionTextFiled.text FromTable:studentTable];
@@ -115,6 +171,7 @@
     return cell;
 }
 
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //从数据源删除此数据
@@ -133,10 +190,17 @@
     [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 }
 
+
+
 /**
  *  返回indexPath对应的编辑样式
  */
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (tableView.editing) {
+        
+        return UITableViewCellEditingStyleInsert;
+    }
     
     return UITableViewCellEditingStyleDelete;
 }
@@ -197,7 +261,5 @@
 -(FMDBManager *)dataBaseManager{
     return [FMDBManager sharedFMDBManager];
 }
-
-
 
 @end

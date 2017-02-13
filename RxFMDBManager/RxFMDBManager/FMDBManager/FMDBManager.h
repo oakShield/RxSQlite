@@ -27,4 +27,7 @@
 //删除
 -(void)executeDeleteWithCondition:(NSString *)condition FromTable:(NSString *)tableName;
 
+//改
+-(void)executeFixWithCondition:(NSString *)condition ToNewName:(NSString *)newName FromTable:(NSString *)tableName WithCompletion:(void (^)(NSError *error))completion;
+
 @end
