@@ -90,7 +90,7 @@ FMDatabaseQueue *queue;
     
     //查询userID为condition或者NAME包含condition的
     
-    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE USERID = %@ OR NAME LIKE '%%%@%%'",tableName,condition,condition];
+    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE USERID = '%@' OR NAME LIKE '%%%@%%'",tableName,condition,condition];
     
     __block NSMutableArray *resultArr = [NSMutableArray array];
     
@@ -179,4 +179,21 @@ FMDatabaseQueue *queue;
     
     return isExist;
 }
+
+
+-(void)executeDeleteWithCondition:(NSString *)condition FromTable:(NSString *)tableName{
+    
+    NSString *sql = [NSString stringWithFormat:@"DELETE FROM %@ WHERE userId = '%@'",tableName,condition];
+    
+    [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+       
+        if (![db executeUpdate:sql]) {
+            *rollback = YES;
+
+        }
+        
+    }];
+    
+}
+
 @end

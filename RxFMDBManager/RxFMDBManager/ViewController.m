@@ -45,6 +45,16 @@
                 //刷新列表
                 [SVProgressHUD showSuccessWithStatus:@"插入成功"];
                 
+                RxStudentModel *model = [[RxStudentModel alloc] init];
+                
+                model.name = self.nameTextFiled.text;
+                
+                model.userId = self.userIDTextFiled.text;
+                
+                [self.studentsArr addObject:model];
+                
+                [self.tableView reloadData];
+                
                 
             }else{
                 [SVProgressHUD showErrorWithStatus:@"插入失败,检查userId是否重复"];
@@ -55,6 +65,7 @@
     }
 }
 - (IBAction)deleteBtnClick:(id)sender {
+    [self.tableView setEditing:!self.tableView.editing animated:YES] ;
 }
 - (IBAction)fixBtnClick:(id)sender {
 }
@@ -103,6 +114,33 @@
     
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //从数据源删除此数据
+    RxStudentModel *model = self.studentsArr[indexPath.row];
+    
+    [self.studentsArr removeObjectAtIndex:indexPath.row];
+    
+    //从数据库删除数据
+    
+    NSString *userId = model.userId;
+    
+    [self.dataBaseManager executeDeleteWithCondition:userId FromTable:studentTable];
+    
+    //刷新界面
+    
+    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+/**
+ *  返回indexPath对应的编辑样式
+ */
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return UITableViewCellEditingStyleDelete;
+}
+
 
 #pragma mark - 自定义方法
 

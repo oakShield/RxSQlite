@@ -24,4 +24,7 @@
 
 -(BOOL)executeTableExist:(NSString *)tableName;
 
+//删除
+-(void)executeDeleteWithCondition:(NSString *)condition FromTable:(NSString *)tableName;
+
 @end
